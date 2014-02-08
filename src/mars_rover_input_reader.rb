@@ -1,12 +1,16 @@
+require "singleton"
+
 class MarsRoverInputReader
 
-  def initialize()
-    @rovers = Array.new
-    @rovers_moves = Array.new
-  end
+  include Singleton
+
+  attr_reader :rovers, :rovers_moves, :plateau
 
   #TODO: do not use odd or even for lines, use pattern matching
 	def read(file_path)
+    @rovers = Array.new
+    @rovers_moves = Array.new
+
     line_counter = 1
 		File.open(file_path).each do |line|
         if line_counter == 1
@@ -22,7 +26,7 @@ class MarsRoverInputReader
         line_counter = line_counter + 1
         puts line
   	end
-    return MarsRoversAndPlateauInitialSettings.new(@plateau, @rovers, @rovers_moves)
+    return self
 	end
 
   def read_plateau_size(line)
