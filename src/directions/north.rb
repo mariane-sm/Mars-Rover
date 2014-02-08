@@ -10,7 +10,7 @@ class North
     end
   end
 
-  def print()
+  def to_s()
     return 'N'
   end
 end

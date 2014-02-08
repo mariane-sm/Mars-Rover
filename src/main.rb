@@ -3,12 +3,12 @@
   require_relative 'plateau'
   require_relative 'mars_rovers_and_plateau_initial_settings'
   require_relative 'orientation_factory'
-  require_relative 'north'
-  require_relative 'south'
-  require_relative 'west'
-  require_relative 'east'
+  require_relative 'directions/north'
+  require_relative 'directions/south'
+  require_relative 'directions/west'
+  require_relative 'directions/east'
 
-  initial_settings = MarsRoverInputReader.new.read("input.txt")
+  initial_settings = MarsRoverInputReader.new.read("../input.txt")
 
   count = 0
   initial_settings.rovers.each do |rover|

@@ -10,7 +10,7 @@ class West
     end
   end
 
-  def print()
+  def to_s()
     return 'W'
   end
 end

@@ -19,6 +19,6 @@ class Rover
   end
 
   def show()
-    puts @current_x.to_s + " " + @current_y.to_s + " " + @orientation.print()
+    puts @current_x.to_s + " " + @current_y.to_s + " " + @orientation.to_s
   end
 end

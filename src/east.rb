@@ -10,7 +10,7 @@ class East
     end
   end
 
-  def print()
+  def to_s()
     return 'E'
   end
 end
