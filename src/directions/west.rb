@@ -4,14 +4,13 @@ class West
 
   include Singleton
 
-  def execute_move(move, rover)
-    if move == 'R'
+  def execute(command)
+    if command == 'R'
       return North.instance
-    elsif move == 'L'
+    elsif command == 'L'
       return South.instance
     else 
-      rover.current_x = rover.current_x.to_i - 1
-      return self
+      puts 'Error !!!'
     end
   end
 

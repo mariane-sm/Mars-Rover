@@ -4,6 +4,7 @@ class MarsRoverInputReader
 
   include Singleton
 
+  #TODO Make these arrays immutable
   attr_reader :rovers, :rovers_moves, :plateau
 
   #TODO: do not use odd or even for lines, use pattern matching

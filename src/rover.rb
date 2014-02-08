@@ -1,24 +1,47 @@
 class Rover
 
-  attr_accessor :current_x, :current_y, :orientation
+  attr_reader :x, :y, :orientation
 
-	def initialize(current_x, current_y, orientation)
-    @current_x = current_x
-    @current_y = current_y
+	def initialize(x, y, orientation)
+    @x = x
+    @y = y
     @orientation = orientation
   end
 
-  def execute_moves(moves)
-    moves.split("").each do |move|
-      make_move(move)
+  def execute_commands(commands)
+    commands.split("").each do |command|
+      if command == 'L' || command == 'R'
+        change_direction(command)
+      elsif command == 'M'
+        move(command)
+      else
+        puts 'Error !!!'
+      end
     end
   end
 
-  def make_move(move)
-    @orientation = @orientation.execute_move(move, self)
+  def change_direction(command)
+    @orientation = @orientation.execute(command)
   end
 
-  def show()
-    puts @current_x.to_s + " " + @current_y.to_s + " " + @orientation.to_s
+  #Use CASE!!!
+  def move(command)
+    if @orientation == South.instance
+      y = y - 1
+    elsif @orientation == North.instance
+      y = y + 1
+    elsif @orientation == West.instance
+      x = x - 1
+    elsif @orientation == East.instance
+      x = x + 1
+    else
+      puts 'Error !!!'
+    end
   end
+
+  def to_s()
+    puts @x.to_s + " " + @y.to_s + " " + @orientation.to_s
+  end
+
+  private :change_direction, :move
 end
