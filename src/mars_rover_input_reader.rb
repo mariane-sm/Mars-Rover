@@ -3,10 +3,9 @@ class MarsRoverInputReader
   def initialize()
     @rovers = Array.new
     @rovers_moves = Array.new
-    @orientation_factory = OrientationFactory.new
   end
 
-  #TODO: do not use odd or even for lines
+  #TODO: do not use odd or even for lines, use pattern matching
 	def read(file_path)
     line_counter = 1
 		File.open(file_path).each do |line|
@@ -34,7 +33,7 @@ class MarsRoverInputReader
   def read_rover_initial_position_and_orientation(line)
     rover_position = line.scan(/\d+/)
     rover_orientation = line.scan(/(N|S|W|E)/)
-    rover = Rover.new(rover_position[0], rover_position[1], @orientation_factory.convert(rover_orientation[0][0].to_s))
+    rover = Rover.new(rover_position[0], rover_position[1], DirectionFactory.instance.get_direction(rover_orientation[0][0].to_s))
     @rovers.push(rover)
   end
 

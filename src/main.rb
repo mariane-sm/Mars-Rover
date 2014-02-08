@@ -2,7 +2,8 @@
   require_relative 'rover'
   require_relative 'plateau'
   require_relative 'mars_rovers_and_plateau_initial_settings'
-  require_relative 'orientation_factory'
+  
+  require_relative 'directions/direction_factory'
   require_relative 'directions/north'
   require_relative 'directions/south'
   require_relative 'directions/west'
