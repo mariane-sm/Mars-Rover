@@ -15,6 +15,6 @@ class North
   end
 
   def to_s
-    return 'N'
+    return "N"
   end
 end

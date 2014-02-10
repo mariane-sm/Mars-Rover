@@ -15,6 +15,6 @@ class South
   end
 
   def to_s
-    return 'S'
+    return "S"
   end
 end

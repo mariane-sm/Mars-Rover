@@ -15,6 +15,6 @@ class West
   end
 
   def to_s
-    return 'W'
+    return "W"
   end
 end

@@ -15,6 +15,6 @@ class East
   end
 
   def to_s
-    return 'E'
+    return "E"
   end
 end

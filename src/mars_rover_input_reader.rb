@@ -4,47 +4,44 @@ class MarsRoverInputReader
 
   include Singleton
 
-  #TODO Make these arrays immutable
-  attr_reader :rovers, :rovers_moves, :plateau
+  attr_reader :plateau, :commands
 
   #TODO: do not use odd or even for lines, use pattern matching
 	def read(file_path)
-    @rovers = Array.new
-    @rovers_moves = Array.new
+    
+    @commands = Hash.new
+
+    rovers = Array.new
+    commands = Array.new
+    plateau_size = [0, 0]
 
     line_counter = 1
 		File.open(file_path).each do |line|
-        if line_counter == 1
-          read_plateau_size(line)
-        elsif line_counter.even?
-          read_rover_initial_position_and_orientation(line)
-        elsif line_counter.odd? 
-          read_rover_movements(line)
-        else
-          #TODO: Throw exception
-          print "Not possible to read line: " + line
-        end
-        line_counter = line_counter + 1
-        puts line
+      if line_counter == 1
+        plateau_size = line.scan(/\d+/)
+      elsif line_counter.even?
+        rovers.push(create_rover(line))
+      elsif line_counter.odd? 
+        @commands[rovers.last] = line.delete("\n")
+      else
+        raise OutOfPatternInputLine, "Invalid line: "
+      end
+      line_counter = line_counter + 1
   	end
+    @plateau = create_plateau(plateau_size[0], plateau_size[1], rovers)
+
     return self
 	end
 
-  def read_plateau_size(line)
-    plateau_size = line.scan(/\d+/)
-     @plateau = Plateau.new(plateau_size[0], plateau_size[1]) 
+  def create_plateau(plateu_max_x, plateau_max_y, rovers)
+    @plateau = Plateau.new(plateu_max_x, plateau_max_y, rovers)
   end
 
-  def read_rover_initial_position_and_orientation(line)
-    rover_position = line.scan(/\d+/)
-    rover_orientation = line.scan(/(N|S|W|E)/)
-    rover = Rover.new(rover_position[0], rover_position[1], DirectionFactory.instance.get_direction(rover_orientation[0][0].to_s))
-    @rovers.push(rover)
+  def create_rover(line)
+    position = line.scan(/\d+/)
+    orientation = line.scan(/(N|S|W|E)/)
+    return Rover.new(position[0].to_i, position[1].to_i, DirectionFactory.instance.get_direction(orientation[0][0]))
   end
 
-  def read_rover_movements(line)
-    @rovers_moves.push(line)
-  end
-
-  private :read_plateau_size, :read_rover_initial_position_and_orientation, :read_rover_movements
+  private :create_plateau, :create_rover
 end	

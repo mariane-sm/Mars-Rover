@@ -8,15 +8,20 @@
   require_relative 'directions/west'
   require_relative 'directions/east'
 
+ require_relative 'exceptions/unknown_command'
+ require_relative 'exceptions/out_of_pattern_input_line'
+
   #TODO: MAKE TESTS !!!
 
-  #TODO: Read from input
-  initial_settings = MarsRoverInputReader.instance.read("../input.txt")
+  #"../input.txt"
+  reader = MarsRoverInputReader.instance.read(ARGV[0])
+  plateau = reader.plateau
+  commands = reader.commands
 
-  count = 0
-  initial_settings.rovers.each do |rover|
-    rovers_moves = initial_settings.rovers_moves[count]
-    count += count
-    rover.execute_commands(rovers_moves)
-    rover.to_s
+  puts puts plateau.to_s
+
+  plateau.get_rovers_enum.each do |rover|
+    rover.execute_commands(commands[rover])
   end
+
+  puts plateau.to_s

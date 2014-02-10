@@ -1,0 +1,2 @@
+class OutOfPatternInputLine < Exception
+end
