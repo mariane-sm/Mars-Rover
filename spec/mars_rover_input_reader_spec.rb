@@ -12,14 +12,14 @@ require_relative '../src/exceptions/unknown_command'
 require_relative '../src/exceptions/out_of_pattern_input_line'
 require_relative '../src/exceptions/rover_with_undefined_orientation'
 
-describe Plateau do
+describe MarsRoverInputReader do
   describe "File Reading" do
 
-    #it "reads plateau size" do
-    #  reader = MarsRoverInputReader.new.read("input_test.txt")
-    #  expected_plateau = Plateau.new(5, 4, nil)
-    #  reader.plateau should eql(expected_plateau)
-    #end
+    it "reads plateau size" do
+      reader = MarsRoverInputReader.new.read("input_test.txt")
+      reader.plateau.max_x.should == 5
+      reader.plateau.max_y.should == 4
+    end
 
     it "raises OutOfPatternInputLine for file with letters for plateau size" do
       expect { MarsRoverInputReader.new.read("input_test_wrong.txt") }.to raise_error(OutOfPatternInputLine)
