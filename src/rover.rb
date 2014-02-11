@@ -13,9 +13,9 @@ class Rover
       if is_direction(command)
         change_direction(command)
       elsif is_move(command)
-        move(command)
+        move
       else
-        raise UnknowCommand, command_to_s + " is invalid"
+        raise UnknownCommand, command.to_s + " is invalid"
       end
     end
   end
@@ -32,12 +32,13 @@ class Rover
     command == 'M'
   end
 
-  def move(command)
+  def move
     case @orientation
       when South.instance then @y = @y - 1
       when North.instance then @y = @y + 1
       when West.instance then @x = @x - 1
       when East.instance then @x = @x + 1
+      else raise RoverWithUndefinedOrientation
     end  
   end
 

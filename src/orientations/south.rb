@@ -10,7 +10,7 @@ class South
     elsif command == 'L'
       return East.instance
     else 
-      puts 'Error!!!'
+      raise UnknowCommand, command.to_s + " is invalid for South orientation" 
     end
   end
 

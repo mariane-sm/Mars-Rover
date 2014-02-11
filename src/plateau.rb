@@ -3,8 +3,8 @@ class Plateau
   attr_reader :max_x, :max_y
 
   def initialize(max_x, max_y, rovers)
-    @max_x = max_x
-    @max_y = max_y
+    @max_x = max_x.to_i
+    @max_y = max_y.to_i
     @rovers = rovers
   end
 

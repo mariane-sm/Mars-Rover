@@ -1,8 +1,4 @@
-require "singleton"
-
 class MarsRoverInputReader
-
-  include Singleton
 
   attr_reader :plateau, :commands
 
@@ -14,7 +10,6 @@ class MarsRoverInputReader
 	def read(file_path)
     
     @commands = Hash.new
-
     rovers = Array.new
     commands = Array.new
     plateau_size = [0, 0]
@@ -31,18 +26,17 @@ class MarsRoverInputReader
       end
   	end
     @plateau = create_plateau(plateau_size[0], plateau_size[1], rovers)
-
     return self
 	end
 
   def create_plateau(plateu_max_x, plateau_max_y, rovers)
-    @plateau = Plateau.new(plateu_max_x, plateau_max_y, rovers)
+    return Plateau.new(plateu_max_x, plateau_max_y, rovers)
   end
 
   def create_rover(line)
     position = line.scan(/\d+/)
     orientation = line.scan(ORIENTATION)
-    return Rover.new(position[0].to_i, position[1].to_i, OrientationFactory.instance.get_orientation(orientation[0][0]))
+    return Rover.new(position[0].to_i, position[1].to_i, OrientationFactory.get_orientation(orientation[0][0]))
   end
 
   private :create_plateau, :create_rover

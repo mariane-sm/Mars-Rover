@@ -1,0 +1,2 @@
+class RoverWithUndefinedOrientation < Exception
+end
