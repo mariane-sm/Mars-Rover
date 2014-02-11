@@ -1,2 +1,0 @@
-class RoverWithUndefinedOrientation < Exception
-end

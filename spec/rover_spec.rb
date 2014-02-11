@@ -10,7 +10,7 @@ require_relative '../src/orientations/east'
 
 require_relative '../src/exceptions/unknown_command'
 require_relative '../src/exceptions/out_of_pattern_input_line'
-require_relative '../src/exceptions/rover_with_undefined_orientation'
+require_relative '../src/exceptions/undefined_orientation'
 
 describe Rover do
   describe "Creation" do
@@ -41,7 +41,7 @@ describe Rover do
 
     it "raises RoverWithUndefinedOrientation when initialize orientation with string" do
       rover = Rover.new(0, 0, "N")
-      expect { rover.execute_commands('MRMLL') }.to raise_error(RoverWithUndefinedOrientation)
+      expect { rover.execute_commands('MRMLL') }.to raise_error(UndefinedOrientation)
     end 
 
     it "raises UnknownCommand when command is invalid" do

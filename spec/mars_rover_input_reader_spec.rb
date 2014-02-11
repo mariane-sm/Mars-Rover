@@ -10,7 +10,7 @@ require_relative '../src/orientations/east'
 
 require_relative '../src/exceptions/unknown_command'
 require_relative '../src/exceptions/out_of_pattern_input_line'
-require_relative '../src/exceptions/rover_with_undefined_orientation'
+require_relative '../src/exceptions/undefined_orientation'
 
 describe MarsRoverInputReader do
   describe "File Reading" do

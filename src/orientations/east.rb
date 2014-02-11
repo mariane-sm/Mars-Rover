@@ -10,7 +10,7 @@ class East
     elsif command == 'L'
       return North.instance
     else
-      raise UnknowCommand, command.to_s + " is invalid for North orientation" 
+      raise UnknowCommand, command.to_s + " is invalid for East orientation" 
     end
   end
 

@@ -38,7 +38,7 @@ class Rover
       when North.instance then @y = @y + 1
       when West.instance then @x = @x - 1
       when East.instance then @x = @x + 1
-      else raise RoverWithUndefinedOrientation
+      else raise UndefinedOrientation
     end  
   end
 

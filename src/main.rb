@@ -8,11 +8,9 @@
   require_relative 'orientations/west'
   require_relative 'orientations/east'
 
- require_relative 'exceptions/unknown_command'
- require_relative 'exceptions/out_of_pattern_input_line'
- require_relative 'exceptions/rover_with_undefined_orientation'
-
-  #TODO: MAKE TESTS !!!
+  require_relative 'exceptions/unknown_command'
+  require_relative 'exceptions/out_of_pattern_input_line'
+  require_relative 'exceptions/undefined_orientation'
 
   reader = MarsRoverInputReader.new.read(ARGV[0])
   plateau = reader.plateau

@@ -1,0 +1,2 @@
+class UndefinedOrientation < Exception
+end
