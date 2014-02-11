@@ -1,10 +1,10 @@
 require "singleton"
 
-class DirectionFactory
+class OrientationFactory
 
   include Singleton
 
-  def get_direction(orientation)
+  def get_orientation(orientation)
     if orientation == 'N'
       return North.instance
     elsif orientation == 'S'

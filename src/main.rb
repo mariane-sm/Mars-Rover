@@ -2,18 +2,17 @@
   require_relative 'rover'
   require_relative 'plateau'
 
-  require_relative 'directions/direction_factory'
-  require_relative 'directions/north'
-  require_relative 'directions/south'
-  require_relative 'directions/west'
-  require_relative 'directions/east'
+  require_relative 'orientations/orientation_factory'
+  require_relative 'orientations/north'
+  require_relative 'orientations/south'
+  require_relative 'orientations/west'
+  require_relative 'orientations/east'
 
  require_relative 'exceptions/unknown_command'
  require_relative 'exceptions/out_of_pattern_input_line'
 
   #TODO: MAKE TESTS !!!
 
-  #"../input.txt"
   reader = MarsRoverInputReader.instance.read(ARGV[0])
   plateau = reader.plateau
   commands = reader.commands

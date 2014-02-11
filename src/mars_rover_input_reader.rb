@@ -6,7 +6,11 @@ class MarsRoverInputReader
 
   attr_reader :plateau, :commands
 
-  #TODO: do not use odd or even for lines, use pattern matching
+  DIGITS_SPACE_DIGITS = /^[\d]+ [\d]+$/
+  DIGITS_SPACE_DIGITS_ORIENTATION = /^[\d]+ [\d]+ [N|S|W|E]$/
+  COMMANDS = /[M|L|R]+/
+  ORIENTATION = /(N|S|W|E)/
+
 	def read(file_path)
     
     @commands = Hash.new
@@ -15,18 +19,16 @@ class MarsRoverInputReader
     commands = Array.new
     plateau_size = [0, 0]
 
-    line_counter = 1
 		File.open(file_path).each do |line|
-      if line_counter == 1
+      if line =~ DIGITS_SPACE_DIGITS
         plateau_size = line.scan(/\d+/)
-      elsif line_counter.even?
+      elsif line =~ DIGITS_SPACE_DIGITS_ORIENTATION
         rovers.push(create_rover(line))
-      elsif line_counter.odd? 
+      elsif line =~ COMMANDS
         @commands[rovers.last] = line.delete("\n")
       else
         raise OutOfPatternInputLine, "Invalid line: "
       end
-      line_counter = line_counter + 1
   	end
     @plateau = create_plateau(plateau_size[0], plateau_size[1], rovers)
 
@@ -39,8 +41,8 @@ class MarsRoverInputReader
 
   def create_rover(line)
     position = line.scan(/\d+/)
-    orientation = line.scan(/(N|S|W|E)/)
-    return Rover.new(position[0].to_i, position[1].to_i, DirectionFactory.instance.get_direction(orientation[0][0]))
+    orientation = line.scan(ORIENTATION)
+    return Rover.new(position[0].to_i, position[1].to_i, OrientationFactory.instance.get_orientation(orientation[0][0]))
   end
 
   private :create_plateau, :create_rover
